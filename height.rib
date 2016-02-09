@@ -1,0 +1,45 @@
+##RenderMan RIB
+version 3.03
+# Michael Rose
+# January 22 2016
+# As of January 13th, 2016, this file compiles using 
+# prman.exe from the non-commercial version of
+# Renderman found in RenderManProServer-20.6
+
+# declare the variables:
+
+Declare "Ad"  "uniform float"
+Declare "Bd" "uniform float"
+Declare "Amp" "uniform float"
+Declare "Height" "uniform float"
+
+# define the output file:
+
+Display "height.tiff" "file" "rgb" 
+Format 500 500 -1
+
+# define the lighting:
+
+LightSource "ambientlight" 1 "intensity" [0.25]
+LightSource "distantlight" 2 "intensity" [0.75] "from" [5 8 -10] "to" [0 0 0]
+
+
+# define the rendering parameters:
+
+ShadingRate 1
+Projection "perspective" "fov" [70]
+
+# define the scene to be rendered:
+
+WorldBegin
+    Attribute "bound" "displacement" [1.5]
+	Surface "ovals" "Ad" 0.05 "Bd" 0.075 "Amp" .6
+	Displacement "height" "Ad" 0.05 "Bd" 0.075 "Amp" .6 "Height" .2
+	Color   [1 1 1]				# specify the Cs color
+	Opacity [1 1 1]				# specify the Os opacity
+	TransformBegin
+		Translate 0 0 6			# move away from the eye (= gluLookAt)
+		Rotate 90  1. 0. 0.		# rotate so don't see north pole
+		Sphere 3 -3 3 360 		# a full sphere
+	TransformEnd
+WorldEnd
