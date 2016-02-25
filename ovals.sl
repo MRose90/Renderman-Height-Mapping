@@ -53,8 +53,7 @@ ovals(
 
 	float oldrad = length(delta);		// result from the ellipse equation
 	float newrad = oldrad+Amp*magnitude;
-	delta = delta * newrad / oldrad;
-
+	delta = delta * newrad / oldrad;	//new delta, vector to diff location
 	float deltau = xcomp(delta);
 	float deltav = ycomp(delta);
 	color TheColor = PURPLE;
@@ -63,6 +62,7 @@ ovals(
 	float u = newnuminu * 2 * Ad + Ad;
 	float v = newnuminv * 2 * Bd + Bd;
 	float d = ((deltau-u)/Ad)*((deltau-u)/Ad)+((deltav-v)/Bd)*((deltav-v)/Bd);
+	//uses new delta distance to update color for original point
 	if( d <= 1. )
 	{
 		TheColor = PINK;

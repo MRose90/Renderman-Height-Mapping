@@ -53,6 +53,7 @@ height(
 	float u = newnuminu * 2 * Ad + Ad;
 	float v = newnuminv * 2 * Bd + Bd;
 	float d = ((deltau-u)/Ad)*((deltau-u)/Ad)+((deltav-v)/Bd)*((deltav-v)/Bd);
+	//changes the height based on if the new delta falls inside the circle
 	if(d <= 1.)
 		TheHeight = (1.-d)*Height;			   // apply the blending
 #define DISPLACEMENT_MAPPING
